@@ -1,4 +1,5 @@
 # jekyll local file
 .jekyll*
 _site
-.DS_Store
+**/.DS_Store
+**/.idea/

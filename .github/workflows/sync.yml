@@ -1,0 +1,20 @@
+name: Sync
+
+on:
+  # Triggers the workflow on push event
+  push:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  Sync-to-Gitee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wearerequired/git-mirror-action@v1.2.0
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        with:
+          source-repo: "git@github.com:vveicc/vveicc.github.io.git"
+          destination-repo: "git@gitee.com:vveicc/vveicc.github.io.git"
