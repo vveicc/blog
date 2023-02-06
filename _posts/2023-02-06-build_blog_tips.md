@@ -2,7 +2,7 @@
 layout: post
 title: "GitHub Pages搭建个人博客Tips"
 date: 2023-02-06
-tags: [blog]
+tags: [GitHub Pages]
 comments: true
 author: vveicc
 ---

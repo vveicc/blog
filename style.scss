@@ -319,7 +319,7 @@ img {
 //
 
 .wrapper-sidebar {
-  width: 24%;
+  width: 21%;
 	-webkit-background-size: cover;
 	background-size: cover;
 	background-color: $background-color;
@@ -429,7 +429,7 @@ nav {
 
 .wrapper-content {
   float: right;
-  width: 76%;
+  width: 79%;
 
   @include mobile {
     float: none;
@@ -556,9 +556,9 @@ div.search-container ol {
 // TOC
 
 .toc {
-  width: 240px;
+  width: 300px;
   height: 100%;
-  left: 30%;
+  left: 21%;
   position: fixed;
   z-index: 4;
   padding: 60px 20px 0 20px;
@@ -584,7 +584,7 @@ div.search-container ol {
 
 @media screen and (max-width:2200px) and (min-width:1200px){
   .withtoc{
-    padding-left: 260px;
+    padding-left: 280px;
   }
 }
 
