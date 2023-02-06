@@ -12,9 +12,9 @@ description: "因为热爱 所以坚持"
 #
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://raw.githubusercontent.com/vveicc/vveicc.github.io/gh-pages/images/avatar.png
+avatar: https://raw.githubusercontent.com/vveicc/vveicc.github.io/main/images/avatar.png
 # 你的favicon（出现在浏览器tab上）图片URL，建议使用较小(64px × 64px)的图片
-favicon: https://raw.githubusercontent.com/vveicc/vveicc.github.io/gh-pages/images/favicon.ico
+favicon: https://raw.githubusercontent.com/vveicc/vveicc.github.io/main/images/favicon.ico
 
 # Tabs in header. There are 'Blog', 'About', 'Archive', 'Tags'
 # and URL Link(e.g. 'Theme' tab below) tabs. If you don't need one, just delete
