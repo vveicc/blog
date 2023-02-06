@@ -2,20 +2,10 @@
 layout: default
 ---
 <div class="search-container">
-  <input type="text" id="search-input" placeholder="search blog posts..." style="width: 90%;
-    height: 35px;
-    color: #333;
-    background-color: rgba(227,231,236,.2);
-    line-height: 35px;
-    padding:0px 16px;
-    border: 1px solid #c0c0c0;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 17px;
-    outline: none;
-    box-sizing: border-box;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);">
-  <ul id="results-container"></ul>
+  <form>
+    <input type="text" id="search-input" placeholder="请输入想要搜索的博客...">
+  </form>
+  <ol id="results-container"></ol>
 </div>
 
 <!--script src="https://unpkg.com/simple-jekyll-search/dest/simple-jekyll-search.min.js"></script-->
@@ -27,8 +17,8 @@ layout: default
 	resultsContainer: document.getElementById('results-container'),
 	json: '{{ site.baseurl }}/search.json',
 	searchResultTemplate: '<li><a href="{url}?query={query}" title="{desc}">{title}</a></li>',
-	noResultsText: 'No results found',
-	limit: 10,
+	noResultsText: '空不是无，空是一种存在~',
+	limit: 9,
 	fuzzy: false,
 	exclude: ['Welcome']
   })
