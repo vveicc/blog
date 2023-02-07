@@ -31,6 +31,7 @@ Gitee:`设置`->`安全设置`->`SSH公钥`
 
 在GitHub仓库中添加`.github/workflows/sync.yml`文件：
 
+{% raw %}
 ```yaml
 name: Sync
 
@@ -53,3 +54,4 @@ jobs:
           source-repo: "git@github.com:vveicc/vveicc.github.io.git"     # 源仓库SSH URL
           destination-repo: "git@gitee.com:vveicc/vveicc.github.io.git" # 目标仓库SSH URL
 ```
+{% endraw %}
