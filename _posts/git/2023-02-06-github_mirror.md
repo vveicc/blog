@@ -8,7 +8,9 @@ comments: true
 author: vveicc
 ---
 
-通过GitHub Actions可以方便的将托管在GitHub平台的仓库同步到其他代码托管平台，实现仓库备份。本文以将GitHub仓库同步至Gitee为例，介绍具体步骤。
+通过GitHub Actions可以方便的将托管在GitHub平台的仓库同步到其他代码托管平台，实现仓库备份。
+
+本文以GitHub仓库同步至Gitee为例，介绍使用[git-mirror-action](https://github.com/wearerequired/git-mirror-action)备份GitHub仓库的具体步骤。
 
 <!-- more -->
 
