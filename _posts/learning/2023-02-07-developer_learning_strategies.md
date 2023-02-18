@@ -74,6 +74,3 @@ author: vveicc
 
 - **使用概览-细节式学习**：先整体后细节，先了解使用后理解细节原理
 - **请教熟悉这个Topic的人**：询问他们从哪里开始，他们在开始学习该技术时做了什么
-
----
-整理自 [Developer Learning Strategies](https://jenkov.com/tutorials/dev-essentials/developer-learning-strategies.html)。

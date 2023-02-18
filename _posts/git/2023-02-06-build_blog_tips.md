@@ -17,4 +17,4 @@ author: vveicc
 
 ## 本地调试预览
 
-首先安装[Jekyll](https://jekyllcn.com)，然后在仓库根目录下运行`jekyll server`，使用浏览器打开[localhost:4000](http://localhost:4000)即可预览。
+首先安装[Jekyll](https://jekyllcn.com)，然后在仓库根目录下运行`jekyll serve`，使用浏览器打开[localhost:4000](http://localhost:4000)即可预览。
