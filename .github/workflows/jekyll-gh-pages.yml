@@ -45,4 +45,3 @@ jobs:
       - uses: helaili/jekyll-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          bundler_version: "2.4.7"
