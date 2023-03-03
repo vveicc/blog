@@ -91,6 +91,7 @@ DEPENDENCIES
   jekyll-feed
   jekyll-paginate
   jekyll-sitemap
+  sass-embedded (~> 1.54)
 
 BUNDLED WITH
    2.1.4
