@@ -1,0 +1,6 @@
+{% if page.cf %}
+{% assign cf_pref = "https://codeforces.com/problemset/problem" %}
+{% assign luogu_pref = "https://www.luogu.com.cn/problem/CF" %}
+{% assign cf_items = page.cf | split: '-' %}
+在 [Codeforces]({{ cf_pref }}/{{ cf_items[0] }}/{{ cf_items[1] }}) 或 [洛谷]({{ luogu_pref }}{{ cf_items[0] }}{{ cf_items[1] }}) 上查看该题。
+{% endif %}

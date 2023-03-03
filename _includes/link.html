@@ -1,0 +1,17 @@
+<script>
+    (function (d) {
+        const blank_suf = "__blank/";
+        const site_url = "{{ site.url }}";
+        const as = d.getElementById("main").getElementsByTagName("a");
+        for (let i = 0; i < as.length; i++) {
+            const a = as[i];
+            const url = a.href;
+            if (!url.startsWith(site_url)) {
+                a.target = "_blank"
+            } else if (url.endsWith(blank_suf)) {
+                a.href = url.substring(0, url.length - blank_suf.length)
+                a.target = "_blank"
+            }
+        }
+    })(document);
+</script>

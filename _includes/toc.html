@@ -83,9 +83,9 @@
             {% assign space = space | prepend: '    ' %}
         {% endfor %}
 
-        {% unless include.item_class == blank %}
+        {% if include.item_class and include.item_class != blank %}
             {% capture listItemClass %}{:.{{ include.item_class | replace: '%level%', headerLevel }}}{% endcapture %}
-        {% endunless %}
+        {% endif %}
 
         {% capture heading_body %}{% if include.sanitize %}{{ header | strip_html }}{% else %}{{ header }}{% endif %}{% endcapture %}
         {% capture my_toc %}{{ my_toc }}
