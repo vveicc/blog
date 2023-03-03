@@ -26,10 +26,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up RubyGems 3.3.5
+      - name: Set up Ruby 2.7
         uses: ruby/setup-ruby@v1
         with:
-          rubygems: "3.3.5"
+          ruby-version: "2.7"
+          rubygems: "3.4.7"
 
       # Build & Deploy
       # Use GitHub Actions' cache to shorten build times and decrease load on servers
