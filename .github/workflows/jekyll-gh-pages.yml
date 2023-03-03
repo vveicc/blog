@@ -9,12 +9,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 # Allow one concurrent deployment
 concurrency:
   group: "pages"
@@ -25,13 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: Set up Ruby 2.7
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "2.7"
-          rubygems: "3.4.7"
-          bundler-cache: true
 
       # Build & Deploy
       # Use GitHub Actions' cache to shorten build times and decrease load on servers
@@ -45,4 +32,3 @@ jobs:
       - uses: helaili/jekyll-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          bundler_version: "2.4.7"

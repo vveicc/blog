@@ -5,4 +5,5 @@ group :jekyll_plugins do
   gem "jekyll-sitemap"
   gem "jekyll-paginate"
   gem "jekyll-commonmark-codetabs"
+  gem "jekyll-sass-converter", "~> 2.0"
 end
