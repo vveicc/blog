@@ -93,6 +93,12 @@ paginate_path: /page/:num/
 # The release of Jekyll Now that you're using
 version: v1.2.0
 
+markdown: CommonMarkCodeTabs
+
+commonmark:
+  options: ["SMART", "FOOTNOTES"]
+  extensions: ["strikethrough", "autolink", "table", "tagfilter"]
+
 # Jekyll 3 now only supports Kramdown for Markdown
 kramdown:
   # Use GitHub flavored markdown, including triple backtick fenced code blocks
@@ -109,12 +115,14 @@ sass:
 
 # Use the following plug-ins
 plugins:
-  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-paginate
+  - jekyll-commonmark-codetabs
 
 # Exclude these files from your production _site
 exclude:
+  - vendor
   - Gemfile
   - Gemfile.lock
   - LICENSE

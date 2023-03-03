@@ -3,3 +3,6 @@
 _site
 **/.DS_Store
 **/.idea/
+.bundle/
+.sass-cache
+vendor/
