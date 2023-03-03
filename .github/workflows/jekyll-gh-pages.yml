@@ -31,6 +31,7 @@ jobs:
         with:
           ruby-version: "2.7"
           rubygems: "3.4.7"
+          bundler-cache: true
 
       # Build & Deploy
       # Use GitHub Actions' cache to shorten build times and decrease load on servers
@@ -44,3 +45,4 @@ jobs:
       - uses: helaili/jekyll-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          bundler_version: "2.4.7"
