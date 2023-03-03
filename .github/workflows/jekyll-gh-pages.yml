@@ -1,5 +1,5 @@
 # Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+name: Build and deploy Jekyll
 
 on:
   # Runs on pushes targeting the default branch
@@ -26,6 +26,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up RubyGems 3.3.5
+        uses: ruby/setup-ruby@v1
+        with:
+          rubygems: "3.3.5"
+
+      # Build & Deploy
       # Use GitHub Actions' cache to shorten build times and decrease load on servers
       - uses: actions/cache@v2
         with:
@@ -34,9 +40,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
 
-      - run: gem update --system
-
-      # Standard usage
       - uses: helaili/jekyll-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
