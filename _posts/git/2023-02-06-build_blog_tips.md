@@ -165,3 +165,16 @@ jobs:
           target_branch: 'gh-pages'
 ```
 {% endraw %}
+
+如果在GitHub Actions运行过程中遇到如下报错：
+
+```text
+sass-embedded-1.58.3-x86_64-linux-musl requires rubygems version >= 3.3.22,
+which is incompatible with the current version, 3.1.6
+```
+
+可以尝试在 `Gemfile` 文件中设置旧版本的sass转换器来解决：
+
+```ruby
+gem "jekyll-sass-converter", "~> 2.0"
+```
