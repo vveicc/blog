@@ -2,5 +2,11 @@
 {% assign cf_pref = "https://codeforces.com/problemset/problem" %}
 {% assign luogu_pref = "https://www.luogu.com.cn/problem/CF" %}
 {% assign cf_items = page.cf | split: '-' %}
-在 [Codeforces]({{ cf_pref }}/{{ cf_items[0] }}/{{ cf_items[1] }}) 或 [洛谷]({{ luogu_pref }}{{ cf_items[0] }}{{ cf_items[1] }}) 上查看该题。
+在 [Codeforces]({{ cf_pref }}/{{ cf_items[0] }}/{{ cf_items[1] }}) 或 [洛谷]({{ luogu_pref }}{{ cf_items[0] }}{{ cf_items[1] }}) 查看该题。
+{% endif %}
+
+{% if page.lcTitleSlug %}
+{% assign cn_pref = "https://leetcode.cn/problems/" %}
+{% assign en_pref = "https://leetcode.com/problems/" %}
+在 [LeetCode主站]({{ en_pref }}{{page.lcTitleSlug}}) 或 [力扣中文社区]({{ cn_pref }}{{page.lcTitleSlug}}) 查看该题。
 {% endif %}
