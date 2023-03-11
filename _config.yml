@@ -65,7 +65,7 @@ disqus:
 gitalk:
   clientID: 7e605d2bb17c05e42c88
   clientSecret: f63b30c9663285a3565f0b645301e76b6c3fbde2
-  repo: vveicc.github.io
+  repo: blog
   owner: vveicc
 
 # Enter your Google Analytics web tracking code to activate tracking
