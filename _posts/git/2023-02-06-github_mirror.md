@@ -53,7 +53,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} # SSH_PRIVATE_KEY是将私钥添加至GitHub仓库时设置的名称
         with:
-          source-repo: "git@github.com:vveicc/vveicc.github.io.git"     # 源仓库SSH URL
-          destination-repo: "git@gitee.com:vveicc/vveicc.github.io.git" # 目标仓库SSH URL
+          source-repo: "git@github.com:***/***.git"     # 源仓库SSH URL
+          destination-repo: "git@gitee.com:***/***.git" # 目标仓库SSH URL
 ```
 {% endraw %}

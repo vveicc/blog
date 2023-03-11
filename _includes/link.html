@@ -3,8 +3,8 @@
         const blank_suf = "__blank/";
         const site_url = "{{ site.url }}";
         const as = d.getElementById("main").getElementsByTagName("a");
-        for (let i = 0; i < as.length; i++) {
-            const a = as[i];
+        for (const element of as) {
+            const a = element;
             const url = a.href;
             if (!url.startsWith(site_url)) {
                 a.target = "_blank"

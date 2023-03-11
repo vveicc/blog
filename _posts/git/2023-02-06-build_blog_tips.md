@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "GitHub Pages搭建个人博客Tips"
+title: "使用Jekyll搭建GitHub Pages个人博客"
 date: 2023-02-06
 tags: [GitHub Pages]
 toc: true
