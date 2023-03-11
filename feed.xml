@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://vveicc.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://vveicc.github.io/blog/" rel="alternate" type="text/html" /><updated>2023-03-11T15:32:55+00:00</updated><id>https://vveicc.github.io/blog/feed.xml</id><title type="html">vveicc’s blog</title><subtitle>因为热爱 所以坚持</subtitle><entry><title type="html">开发者学习策略</title><link href="https://vveicc.github.io/blog/developer_learning_strategies" rel="alternate" type="text/html" title="开发者学习策略" /><published>2023-02-07T00:00:00+00:00</published><updated>2023-02-07T00:00:00+00:00</updated><id>https://vveicc.github.io/blog/developer_learning_strategies</id><content type="html" xml:base="https://vveicc.github.io/blog/developer_learning_strategies"><![CDATA[<p>作为一名开发者，需要不断学习新技术，跟上现有技术的变化。</p>
+<p>学习的过程可能令人兴奋、趣味十足，但也有可能令人沮丧、倍感压力。</p>
+<p>因此需要掌握一定的学习策略，帮助我们战胜学习过程中遇到的困难和挑战，这样也就不会那么容易放弃。</p>
+<!-- more -->
+<h2 id="section">1.接受学习是困难的</h2>
+<p>负面情绪往往来自于过高的期望。</p>
+<p>如果预期学习比较简单，那么学习过程中的困难和挑战就可能会带给我们更多的沮丧；</p>
+<p>如果预期学习比较困难，那么学习过程中的困难和挑战就不太容易让你感到失望、沮丧，因为你已经预料到会很难。</p>
+<p>因此，接受学习是困难的，这是一个有效的思维技巧，可以减轻与学习斗争相关的负面情绪。</p>
+<p>换句话说，如果你认为生活是艰难的，那么生活就会变得轻松。</p>
+<h2 id="section-1">2.导致学习困难的问题</h2>
+<p>导致学习困难的问题有很多，其中有一些并不是你的问题。因此在学习过程中遇到困难，不用盲目的责怪自己。</p>
+<h3 id="section-2">问题一：糟糕的学习资料</h3>
+<p>解决方法：</p>
+<ul>
+<li><strong>更换学习资料</strong>：找到更易于理解学习的资料</li>
+<li><strong>过段时间再来学习这个Topic</strong>：比较新的技术可能当下并没有比较好的学习资料，可以过段时间再来学习</li>
+</ul>
+<h3 id="section-3">问题二：浮于表象</h3>
+<p>解决方法：</p>
+<ul>
+<li><strong>学习并理解技术原理</strong>：理解是最重要的，而不是翻阅资料</li>
+</ul>
+<h3 id="section-4">问题三：边学边忘记不住</h3>
+<p>解决方法：</p>
+<ul>
+<li><strong>重复学习直至记住</strong>：提高记忆力最简单的方法之一就是重复</li>
+<li><strong>使用高效的记忆技巧</strong>：利用思维导图、技术图表等视觉记忆</li>
+<li><strong>练习实践</strong>：学以致用，把所学技术用起来，常用的技术自然容易记住</li>
+<li><strong>总结、沉淀、输出</strong>：多总结，将对技术的理解沉淀输出，例如写博客</li>
+</ul>
+<h3 id="section-5">问题四：疲劳和压力</h3>
+<p>解决方法：</p>
+<ul>
+<li><strong>休息和冷静下来</strong>：对付疲劳和压力的最好办法就是休息，试着让自己冷静下来</li>
+<li><strong>一次只做一件事情</strong>：同时做太多的事情会感到压力很大，无法专注且效率低下</li>
+<li><strong>专注于此时此刻</strong>：不要因为未来还有很多学不完的技术而感到压力，专注于当下，一步一个脚印的进步</li>
+</ul>
+<h3 id="section-6">问题五：错误的学习速度</h3>
+<p>解决方法：</p>
+<ul>
+<li><strong>找到适合自己的学习速度</strong>：不同人当前的知识储备不同，学习不同Topic的速度就会有差异</li>
+</ul>
+<h3 id="section-7">问题六：不知道从哪里开始</h3>
+<p>解决方法：</p>
+<ul>
+<li><strong>使用概览-细节式学习</strong>：先整体后细节，先了解使用后理解细节原理</li>
+<li><strong>请教熟悉这个Topic的人</strong>：询问他们从哪里开始，他们在开始学习该技术时做了什么</li>
+</ul>]]></content><author><name>vveicc</name></author><category term="Learning" /><summary type="html"><![CDATA[作为一名开发者，需要不断学习新技术，跟上现有技术的变化。 学习的过程可能令人兴奋、趣味十足，但也有可能令人沮丧、倍感压力。 因此需要掌握一定的学习策略，帮助我们战胜学习过程中遇到的困难和挑战，这样也就不会那么容易放弃。]]></summary></entry><entry><title type="html">通过GitHub Actions备份GitHub仓库</title><link href="https://vveicc.github.io/blog/github_mirror" rel="alternate" type="text/html" title="通过GitHub Actions备份GitHub仓库" /><published>2023-02-06T00:00:00+00:00</published><updated>2023-02-06T00:00:00+00:00</updated><id>https://vveicc.github.io/blog/github_mirror</id><content type="html" xml:base="https://vveicc.github.io/blog/github_mirror"><![CDATA[<p>通过GitHub Actions可以方便的将托管在GitHub平台的仓库同步到其他代码托管平台，实现仓库备份。</p>
+<p>本文以GitHub仓库同步至Gitee为例，介绍使用<a href="https://github.com/wearerequired/git-mirror-action">git-mirror-action</a>备份GitHub仓库的具体步骤。</p>
+<!-- more -->
+<h2 id="ssh">1.生成新的SSH密钥</h2>
+<p>参考<a href="https://docs.github.com/zh/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#%E7%94%9F%E6%88%90%E6%96%B0-ssh-%E5%AF%86%E9%92%A5">生成新SSH密钥</a>。
+建议使用单独的密钥文件，例如：<code>id_ssh_github_actions</code>。</p>
+<h2 id="githubgitee">2.将公钥添加至GitHub和Gitee</h2>
+<p>GitHub:<code>Settings</code>-&gt;<code>Access</code>-&gt;<code>SSH and GPG keys</code>-&gt;<code>New SSH key</code></p>
+<p>Gitee:<code>设置</code>-&gt;<code>安全设置</code>-&gt;<code>SSH公钥</code></p>
+<h2 id="github">3.将私钥添加至GitHub仓库</h2>
+<p><code>GitHub仓库</code>-&gt;<code>Settings</code>-&gt;<code>Security</code>-&gt;<code>Secrets and variables</code>-&gt;<code>Actions</code>-&gt;<code>New repository secret</code></p>
+<h2 id="github-actions">4.配置GitHub Actions</h2>
+<p>在GitHub仓库中添加<code>.github/workflows/sync.yml</code>文件：</p>
+<div id="code_copied_snackbar">Copied!</div><div class="code_switcher_container_parent 6c531bc9-d958-442e-8300-809eaed037d8"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('6c531bc9-d958-442e-8300-809eaed037d8', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Sync</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="c1"># Triggers the workflow on push event</span>
+  <span class="na">push</span><span class="pi">:</span>
+
+  <span class="c1"># Allows you to run this workflow manually from the Actions tab</span>
+  <span class="na">workflow_dispatch</span><span class="pi">:</span>
+
+<span class="c1"># A workflow run is made up of one or more jobs that can run sequentially or in parallel</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">Sync-to-Gitee</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">wearerequired/git-mirror-action@v1.2.0</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">SSH_PRIVATE_KEY</span><span class="pi">:</span> <span class="s">${{ secrets.SSH_PRIVATE_KEY }}</span> <span class="c1"># SSH_PRIVATE_KEY是将私钥添加至GitHub仓库时设置的名称</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">source-repo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">git@github.com:***/***.git"</span>     <span class="c1"># 源仓库SSH URL</span>
+          <span class="na">destination-repo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">git@gitee.com:***/***.git"</span> <span class="c1"># 目标仓库SSH URL</span>
+</code></pre></div></div>
+</div>]]></content><author><name>vveicc</name></author><category term="GitHub Actions" /><category term="git-mirror-action" /><summary type="html"><![CDATA[通过GitHub Actions可以方便的将托管在GitHub平台的仓库同步到其他代码托管平台，实现仓库备份。 本文以GitHub仓库同步至Gitee为例，介绍使用git-mirror-action备份GitHub仓库的具体步骤。]]></summary></entry><entry><title type="html">使用Jekyll搭建GitHub Pages个人博客</title><link href="https://vveicc.github.io/blog/build_blog_tips" rel="alternate" type="text/html" title="使用Jekyll搭建GitHub Pages个人博客" /><published>2023-02-06T00:00:00+00:00</published><updated>2023-02-06T00:00:00+00:00</updated><id>https://vveicc.github.io/blog/build_blog_tips</id><content type="html" xml:base="https://vveicc.github.io/blog/build_blog_tips"><![CDATA[<p>详细步骤可以参考<a href="https://lemonchann.github.io/create_blog_with_github_pages">完整教程</a>，此处只记录一些小问题以及后续操作可能会遇到的点。</p>
+<!-- more -->
+<h2 id="section">本地调试预览</h2>
+<p>首先安装<a href="https://jekyllcn.com">Jekyll</a>，然后在仓库根目录下运行<code>jekyll serve</code>，使用浏览器打开<a href="http://localhost:4000">localhost:4000</a>即可预览。</p>
+<h2 id="google-analytics">Google Analytics</h2>
+<p><a href="https://analytics.google.com/analytics">Google Analytics</a>已经升级为Google Analytics 4，不过使用起来难度也不大，可以参考<a href="https://skillshop.exceedlms.com/student/path/66749-google-analytics">官方文档</a>学习了解。</p>
+<h2 id="latex">支持LaTeX数学公式</h2>
+<p>在<code>&lt;head&gt;&lt;/head&gt;</code>标签中引入<a href="https://www.mathjax.org/#gettingstarted">MathJax@3</a>：</p>
+<div id="code_copied_snackbar">Copied!</div><div class="code_switcher_container_parent e58be62e-295f-4a84-8559-b47e642a93c5"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('e58be62e-295f-4a84-8559-b47e642a93c5', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://polyfill.io/v3/polyfill.min.js?features=es6"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">id=</span><span class="s">"MathJax-script"</span> <span class="na">async</span> <span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+</div>
+<p><a href="https://polyfill.io/v3/">Polyfill</a>的作用是对老浏览器做支持，如果不需要可以不引入。</p>
+<p>行内公式配置：</p>
+<div class="code_switcher_container_parent 40985f54-f0e1-40c0-9baf-171a57274db2"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('40985f54-f0e1-40c0-9baf-171a57274db2', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+  <span class="nx">MathJax</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">tex</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">inlineMath</span><span class="p">:</span> <span class="p">[[</span><span class="dl">'</span><span class="s1">$</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">$</span><span class="dl">'</span><span class="p">]],</span>
+      <span class="na">processEscapes</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+</div>
+<p>效果展示：</p>
+<p>行内公式：$ax^2 + bx + c = 0$</p>
+<p>行级公式：</p>
+<p>$$
+ax^2 + bx + c = 0
+$$</p>
+<h2 id="codetabs">混合代码段CodeTabs</h2>
+<h3 id="section-1">效果展示</h3>
+<ul class="code-tab-container e73a98e8-435e-43fe-a752-6b0d29c0bb20"><li class="active-tab code_switcher_cpp"><a onclick="selectTab('code_switcher_cpp', 'e73a98e8-435e-43fe-a752-6b0d29c0bb20', 0)">C++</a></li><li class=" code_switcher_java"><a onclick="selectTab('code_switcher_java', 'e73a98e8-435e-43fe-a752-6b0d29c0bb20', 1)">Java</a></li><li class=" code_switcher_python"><a onclick="selectTab('code_switcher_python', 'e73a98e8-435e-43fe-a752-6b0d29c0bb20', 2)">Python3</a></li><li class=" code_switcher_md"><a onclick="selectTab('code_switcher_md', 'e73a98e8-435e-43fe-a752-6b0d29c0bb20', 3)">Markdown示例</a></li></ul><ul class="code-tab-switcher e73a98e8-435e-43fe-a752-6b0d29c0bb20"><li class="code_switcher_container_parent active-tab code_switcher_cpp 591025b9-1d2a-4ca2-aa3e-bf4c8b95c38a"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('591025b9-1d2a-4ca2-aa3e-bf4c8b95c38a', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello, World!"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</code></pre></div></div>
+</li><li class="code_switcher_container_parent code_switcher_java 457b8b17-5317-4ab5-8908-83ae790c0bbc"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('457b8b17-5317-4ab5-8908-83ae790c0bbc', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello, World!"</span><span class="o">);</span>
+</code></pre></div></div>
+</li><li class="code_switcher_container_parent code_switcher_python 6a0d598a-f721-47f4-ae0e-b056319d3d6f"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('6a0d598a-f721-47f4-ae0e-b056319d3d6f', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"Hello, World!"</span><span class="p">)</span>
+</code></pre></div></div>
+</li><li class="code_switcher_container_parent code_switcher_md a8c413a4-27ac-4c46-a3e9-683f300f949b"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('a8c413a4-27ac-4c46-a3e9-683f300f949b', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="p">```</span><span class="nl">cpp C++
+</span><span class="sb">    cout &lt;&lt; "Hello, World!" &lt;&lt; endl;</span>
+    <span class="p">```</span>
+    
+    <span class="p">```</span><span class="nl">java Java
+</span><span class="sb">    System.out.println("Hello, World!");</span>
+    <span class="p">```</span>
+    
+    <span class="p">```</span><span class="nl">python Python3
+</span><span class="sb">    print("Hello, World!")</span>
+    <span class="p">```</span>
+</code></pre></div></div>
+</li></ul>
+<h3 id="section-2">安装插件</h3>
+<p>通过<a href="https://rubygems.org/gems/jekyll-commonmark-codetabs">jekyll-commonmark-codetabs</a>插件实现：</p>
+<p>在 <code>Gemfile</code> 文件中添加 <code>jekyll-commonmark-codetabs</code> gem：</p>
+<div class="code_switcher_container_parent d21746ab-4f30-4daf-a60d-6c6bab9c3aea"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('d21746ab-4f30-4daf-a60d-6c6bab9c3aea', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s1">'jekyll-commonmark-codetabs'</span>
+<span class="k">end</span>
+</code></pre></div></div>
+</div>
+<p>在 <code>_config.yml</code> 文件中配置 Markdown 解析器：</p>
+<div class="code_switcher_container_parent d766bac2-238f-47a3-b444-6bbc4ee6b8c9"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('d766bac2-238f-47a3-b444-6bbc4ee6b8c9', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">markdown</span><span class="pi">:</span> <span class="s">CommonMarkCodeTabs</span>
+</code></pre></div></div>
+</div>
+<p>jekyll-commonmark-codetabs插件基于<a href="https://rubygems.org/gems/jekyll-commonmark-ghpages">jekyll-commonmark-ghpages</a>，可以直接进行配置，示例：</p>
+<div class="code_switcher_container_parent 3b558c88-b873-42d2-82cc-ba956f788da5"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('3b558c88-b873-42d2-82cc-ba956f788da5', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">commonmark</span><span class="pi">:</span>
+  <span class="na">options</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">SMART"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">FOOTNOTES"</span><span class="pi">]</span>
+  <span class="na">extensions</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">strikethrough"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">autolink"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">table"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">tagfilter"</span><span class="pi">]</span>
+</code></pre></div></div>
+</div>
+<p>执行命令安装插件：</p>
+<div class="code_switcher_container_parent 9350f769-919a-4058-abed-23faebdcf974"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('9350f769-919a-4058-abed-23faebdcf974', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">install</span> <span class="nt">--path</span> vendor/bundle
+</code></pre></div></div>
+</div>
+<h3 id="section-3">本地调试</h3>
+<p>在仓库根目录下运行<code>bundle exec jekyll serve</code>。</p>
+<h3 id="github-pages">通过GitHub Pages发布</h3>
+<p>GitHub Pages仅默认支持一小部分Jekyll插件，需要通过GitHub Actions根据 <code>Gemfile</code> 文件安装插件并构建推送至<code>gh-pages</code>分支，再通过GitHub Pages从<code>gh-pages</code>分支部署。</p>
+<p>在GitHub仓库中添加<code>.github/workflows/jekyll-gh-pages.yml</code>文件：</p>
+<div class="code_switcher_container_parent de8f9af7-2375-4281-a5d8-4798291c0fc9"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('de8f9af7-2375-4281-a5d8-4798291c0fc9', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Building and publishing a Jekyll site to branch gh-pages</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">jekyll-gh-pages</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="c1"># Runs on pushes targeting the default branch</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="s2">"</span><span class="s">main"</span> <span class="pi">]</span>
+
+  <span class="c1"># Allows you to run this workflow manually from the Actions tab</span>
+  <span class="na">workflow_dispatch</span><span class="pi">:</span>
+
+<span class="c1"># Allow one concurrent deployment</span>
+<span class="na">concurrency</span><span class="pi">:</span>
+  <span class="na">group</span><span class="pi">:</span> <span class="s2">"</span><span class="s">pages"</span>
+  <span class="na">cancel-in-progress</span><span class="pi">:</span> <span class="no">true</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">jekyll</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+
+      <span class="c1"># Build &amp; Publish</span>
+      <span class="c1"># Use GitHub Actions' cache to shorten build times and decrease load on servers</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/cache@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">path</span><span class="pi">:</span> <span class="s">vendor/bundle</span>
+          <span class="na">key</span><span class="pi">:</span> <span class="s">${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}</span>
+          <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">${{ runner.os }}-gems-</span>
+
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">helaili/jekyll-action@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">token</span><span class="pi">:</span> <span class="s">${{ secrets.PUBLISH_TOKEN }}</span> <span class="c1"># 需要申请GitHub Access Token并添加至GitHub仓库Secrets中</span>
+          <span class="na">target_branch</span><span class="pi">:</span> <span class="s1">'</span><span class="s">gh-pages'</span>
+</code></pre></div></div>
+</div>
+<p>如果在GitHub Actions运行过程中遇到如下报错：</p>
+<div class="code_switcher_container_parent 7b79df7c-6f5b-45aa-b9b4-c7df2fec774d"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('7b79df7c-6f5b-45aa-b9b4-c7df2fec774d', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sass-embedded-1.58.3-x86_64-linux-musl requires rubygems version &gt;= 3.3.22,
+which is incompatible with the current version, 3.1.6
+</code></pre></div></div>
+</div>
+<p>可以尝试在 <code>Gemfile</code> 文件中设置旧版本的sass转换器来解决：</p>
+<div class="code_switcher_container_parent f91e30dd-5590-457e-8107-91cdff12cad1"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('f91e30dd-5590-457e-8107-91cdff12cad1', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="s2">"jekyll-sass-converter"</span><span class="p">,</span> <span class="s2">"~&gt; 2.0"</span>
+</code></pre></div></div>
+</div>]]></content><author><name>vveicc</name></author><category term="GitHub Pages" /><summary type="html"><![CDATA[详细步骤可以参考完整教程，此处只记录一些小问题以及后续操作可能会遇到的点。]]></summary></entry></feed>
