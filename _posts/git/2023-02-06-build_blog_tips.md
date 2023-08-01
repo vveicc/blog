@@ -113,7 +113,8 @@ commonmark:
 执行命令安装插件：
 
 ```bash
-bundle install --path vendor/bundle
+bundle config set --local path 'vendor/bundle'
+bundle install
 ```
 
 ### 本地调试

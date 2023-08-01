@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for host in hadoop02 hadoop03 hadoop04
+do
+	echo "> $host"
+	ssh -o StrictHostKeyChecking=no $host $JAVA_HOME/bin/jps
+done
