@@ -1,0 +1,52 @@
+version: "3.1"
+
+networks:
+  cluster:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.18.0.0/28"
+          gateway: "172.18.0.1"
+
+services:
+  hadoop02:
+    image: vveicc/hadoop:3.3.6
+    hostname: hadoop02
+    container_name: hadoop02
+    restart: always
+    stdin_open: true
+    tty: true
+    networks:
+      cluster:
+        ipv4_address: 172.18.0.2
+    volumes:
+      - ./hadoop02/hadoop/data:/opt/hadoop/data
+      - ./hadoop02/hadoop/logs:/opt/hadoop/logs
+
+  hadoop03:
+    image: vveicc/hadoop:3.3.6
+    hostname: hadoop03
+    container_name: hadoop03
+    restart: always
+    stdin_open: true
+    tty: true
+    networks:
+      cluster:
+        ipv4_address: 172.18.0.3
+    volumes:
+      - ./hadoop03/hadoop/data:/opt/hadoop/data
+      - ./hadoop03/hadoop/logs:/opt/hadoop/logs
+
+  hadoop04:
+    image: vveicc/hadoop:3.3.6
+    hostname: hadoop04
+    container_name: hadoop04
+    restart: always
+    stdin_open: true
+    tty: true
+    networks:
+      cluster:
+        ipv4_address: 172.18.0.4
+    volumes:
+      - ./hadoop04/hadoop/data:/opt/hadoop/data
+      - ./hadoop04/hadoop/logs:/opt/hadoop/logs

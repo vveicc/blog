@@ -20,7 +20,7 @@ Docker Desktop for Mac 没有提供从宿主的macOS通过容器IP访问容器�
 
 - Intel处理器
 - macOS 13.5
-- Docker 24.0.2
+- Docker Engine v24.0.2
 
 ## Docker端mac-docker-connector容器一直在重启
 
