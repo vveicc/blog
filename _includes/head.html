@@ -1,30 +1,31 @@
 <head>
-  {% include ga4.html %}
-  <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }}</title>
+    {% include ga4.html %}
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }}</title>
 
-  {% include meta.html %}
-  {% include fonts.html %}
+    {% include meta.html %}
+    {% include fonts.html %}
 
-  <!--[if lt IE 9]>
+    <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+    <![endif]-->
 
-  <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$']],
-        processEscapes: true
-      }
-    };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-  <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
-  <link rel="shortcut icon" href="{{ site.favicon }}">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css"/>
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}"
+          href="{{ site.baseurl }}/feed.xml"/>
+    <link rel="shortcut icon" href="{{ site.favicon }}">
 
-  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> -->
 
-  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
 </head>
