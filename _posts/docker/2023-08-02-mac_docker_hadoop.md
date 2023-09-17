@@ -528,7 +528,7 @@ services:
 
 编写快速部署脚本：
 
-```shell init.sh
+```shell hadoop-init.sh
 #!/bin/bash
 
 if [ ! $(which wget) ]; then
@@ -560,8 +560,8 @@ docker compose up -d
 在 Mac 上通过脚本快速部署：
 
 ```shell
-wget https://vveicc.github.io/blog/files/docker/hadoop/init.sh
-bash init.sh
+wget https://vveicc.github.io/blog/files/docker/hadoop/hadoop-init.sh
+bash hadoop-init.sh
 ```
 
 ## 启动Hadoop集群

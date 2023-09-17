@@ -1,0 +1,54 @@
+version: '3.1'
+
+services:
+  mysql:
+    image: mysql:8.0
+    hostname: mysql
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+    command: --default-authentication-plugin=mysql_native_password #解决外部无法访问的问题
+
+  redis:
+    image: redis:6.0.8
+    hostname: redis
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/conf/redis.conf:/etc/redis/redis.conf
+      - ./redis/data:/data
+    command: redis-server /etc/redis/redis.conf
+
+  kafka:
+    image: bitnami/kafka:3.5
+    hostname: kafka
+    container_name: kafka
+    restart: always
+    ports:
+      - "9092:9092"
+    volumes:
+      - ./kafka:/bitnami/kafka
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+
+  zookeeper:
+    image: bitnami/zookeeper:3.8
+    hostname: zookeeper
+    container_name: zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+    volumes:
+      - ./zookeeper:/bitnami/zookeeper
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
