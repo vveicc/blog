@@ -10,7 +10,7 @@ mkdir -p develop
 
 cd develop
 wget https://vveicc.github.io/blog/files/docker/develop/docker-compose.yaml
-wget https://vveicc.github.io/blog/files/docker/develop/etc/mysql/my.conf
+wget https://vveicc.github.io/blog/files/docker/develop/etc/mysql/my.cnf
 wget https://vveicc.github.io/blog/files/docker/develop/etc/redis/redis.conf
 
 echo "> 创建宿主机数据卷目录..."
@@ -19,7 +19,7 @@ mkdir -p redis/conf redis/data
 mkdir -p kafka
 mkdir -p zookeeper
 
-mv my.conf mysql/conf/
+mv my.cnf mysql/conf/
 mv redis.conf redis/conf/
 
 echo "> 运行容器实例..."
