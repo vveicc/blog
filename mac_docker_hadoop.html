@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-YLV1JVCE5K"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-YLV1JVCE5K');
+	</script>
+
+
+    <title>Mac基于Docker搭建Hadoop集群 – vveicc's blog</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="在Mac宿主机基于Docker搭建Hadoop分布式集群，仅供学习。
+" />
+    <meta property="og:description" content="在Mac宿主机基于Docker搭建Hadoop分布式集群，仅供学习。
+" />
+    
+    <meta name="author" content="vveicc's blog" />
+
+    
+    <meta property="og:title" content="Mac基于Docker搭建Hadoop集群" />
+    <meta property="twitter:title" content="Mac基于Docker搭建Hadoop集群" />
+    
+    <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js" async></script>
+
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/style.css"/>
+    <link rel="alternate" type="application/rss+xml" title="vveicc's blog - 因为热爱 所以坚持"
+          href="/blog/feed.xml"/>
+    <link rel="shortcut icon" href="/blog/images/favicon.ico">
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> -->
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono"/><link rel="stylesheet" href="/blog/assets/codeblock.css"/><script src="/blog/assets/codeblock.js"></script></head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/blog/" class="site-avatar"><img src="/blog/images/avatar.png" /></a>
+       
+      <h1 class="site-name"><a href="/blog/">vveicc's blog</a></h1>
+      <p class="site-description">因为热爱 所以坚持</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/blog/">首页</a>
+      
+      
+      
+      <a href="/blog/about">关于</a>
+      
+      
+      
+      <a href="/blog/archive">归档</a>
+      
+      
+      
+      <a href="/blog/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+  <li><a href="mailto:vveicc@163.com" target="_blank" class="icon-8 email" title="Email"><svg viewBox="0 0 512 512"><path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/></svg><!--[if lt IE 9]><em>Email</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://leetcode.cn/u/vveicc" target="_blank" class="icon-12 leetcode" title="LeetCode"><svg viewBox="0 0 1024 1024"><path d="M686.969238 765.086476l-115.039501 111.200586c-19.877051 19.919706-47.389279 28.237356-77.759367 28.237357s-57.882315-8.31765-77.802021-28.237357l-184.779799-186.102093c-19.919706-19.919706-29.943541-49.052809-29.943541-79.465551s10.023835-57.882315 29.943541-77.80202l184.225289-186.827222c19.919706-19.919706 47.986444-27.512228 78.356531-27.512228s57.882315 8.31765 77.759367 28.237357l115.039501 111.157931c21.924473 21.967128 58.223552 21.199345 81.043772-1.620876 22.82022-22.862875 23.588003-59.161953 1.66353-81.086426l-111.285895-112.43757a215.619088 215.619088 0 0 0-104.290538-57.029222l105.228939-106.764506c22.009782-21.924473 21.241999-58.266206-1.578221-81.086426-22.82022-22.82022-59.161953-23.545348-81.129081-1.620876l-430.811629 430.854284c-41.844179 41.886834-63.725997 99.683839-63.725997 163.580455 0 63.896616 21.881818 123.485115 63.725997 165.28664l185.419619 186.016783c41.844179 41.75887 99.683839 61.934504 163.537801 61.934504s121.693622-21.839164 163.580455-63.725997l111.285895-112.480225c21.924473-21.924473 21.15669-58.223552-1.66353-81.043772s-59.119299-23.588003-81.001117-1.66353z m200.86059-209.860714H455.098741c-29.943541 0-54.171363 25.763389-54.171363 57.413114s24.227822 57.413114 54.171363 57.413114h432.731087c29.900886 0 54.171363-25.763389 54.171363-57.413114s-24.270477-57.413114-54.171363-57.413114z"/></svg><!--[if lt IE 9]><em>LeetCode</em><![endif]--></a></li>
+  
+
+  
+  <li><a href="https://github.com/vveicc" target="_blank" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>2015-2023 © VVEICC</p>
+
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+<li><a href="#">Mac基于Docker搭建Hadoop集群</a>
+<ul>
+<li><a href="#section">集群规划</a></li>
+<li><a href="#section-1">准备配置文件</a></li>
+<li><a href="#section-2">编写工具脚本</a></li>
+<li><a href="#dockerfile">Dockerfile</a></li>
+<li><a href="#docker-composeyaml">docker-compose.yaml</a></li>
+<li><a href="#section-3">快速部署脚本</a></li>
+<li><a href="#hadoop">启动Hadoop集群</a></li>
+<li><a href="#mac">Mac宿主机访问集群</a></li>
+</ul>
+</li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  
+  <h1>Mac基于Docker搭建Hadoop集群</h1>
+
+  <div clsss="meta">
+    <span class="date">
+      2023-08-02
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="https://vveicc.github.io/blog/tags#Docker">
+          Docker
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://vveicc.github.io/blog/tags#Hadoop">
+          Hadoop
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  
+
+  <div class="entry">
+    <p>在Mac宿主机基于Docker搭建Hadoop分布式集群，仅供学习。</p>
+<!-- more -->
+<hr />
+<p><strong>运行环境</strong>：</p>
+<ul>
+<li>Intel处理器</li>
+<li>macOS 13.5</li>
+<li>Docker Engine v24.0.2</li>
+<li>Docker Compose v2.19.1</li>
+<li>Hadoop 3.3.6</li>
+</ul>
+<h2 id="section">集群规划</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="left">hadoop02</th>
+<th align="left">hadoop03</th>
+<th align="left">hadoop04</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HDFS</td>
+<td align="left">NameNode<br/>DataNode</td>
+<td align="left"><br/>DataNode</td>
+<td align="left">SecondaryNameNode<br/>DataNode</td>
+</tr>
+<tr>
+<td>Yarn</td>
+<td align="left"><br/>NodeManager</td>
+<td align="left">ResourceManager<br/>NodeManager</td>
+<td align="left"><br/>NodeManager</td>
+</tr>
+<tr>
+<td>MapReduce</td>
+<td align="left">JobHistoryServer</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="section-1">准备配置文件</h2>
+<div id="code_copied_snackbar">Copied!</div><ul class="code-tab-container 4874055a-fc62-4fa4-970f-66dcf81fd5d4"><li class="active-tab code_switcher_text"><a onclick="selectTab('code_switcher_text', '4874055a-fc62-4fa4-970f-66dcf81fd5d4', 0)">workers</a></li><li class=" code_switcher_xml"><a onclick="selectTab('code_switcher_xml', '4874055a-fc62-4fa4-970f-66dcf81fd5d4', 1)">core-site.xml</a></li><li class=" code_switcher_xml"><a onclick="selectTab('code_switcher_xml', '4874055a-fc62-4fa4-970f-66dcf81fd5d4', 2)">hdfs-site.xml</a></li><li class=" code_switcher_xml"><a onclick="selectTab('code_switcher_xml', '4874055a-fc62-4fa4-970f-66dcf81fd5d4', 3)">mapred-site.xml</a></li><li class=" code_switcher_xml"><a onclick="selectTab('code_switcher_xml', '4874055a-fc62-4fa4-970f-66dcf81fd5d4', 4)">yarn-site.xml</a></li></ul><ul class="code-tab-switcher 4874055a-fc62-4fa4-970f-66dcf81fd5d4"><li class="code_switcher_container_parent active-tab code_switcher_text ed3056ec-4073-4a0f-9156-77cd99300d9d"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('ed3056ec-4073-4a0f-9156-77cd99300d9d', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadoop02
+hadoop03
+hadoop04
+</code></pre></div></div>
+</li><li class="code_switcher_container_parent code_switcher_xml b7b703ec-d03f-4558-bf35-b71bf9bc465b"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('b7b703ec-d03f-4558-bf35-b71bf9bc465b', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?&gt;</span>
+<span class="c">&lt;!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+--&gt;</span>
+
+<span class="c">&lt;!-- Put site-specific property overrides in this file. --&gt;</span>
+
+<span class="nt">&lt;configuration&gt;</span>
+	<span class="c">&lt;!-- 指定 NameNode 的地址 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>fs.defaultFS<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>hdfs://hadoop02:8020<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 指定 hadoop 数据的存储目录 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>hadoop.tmp.dir<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>/opt/hadoop/data<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 配置 HDFS 网页登录使用的静态用户 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>hadoop.http.staticuser.user<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>root<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+
+	<span class="c">&lt;!-- 开启回收站功能，并设置回收站中文件存活时间为60分钟 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>fs.trash.interval<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>60<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div></div>
+</li><li class="code_switcher_container_parent code_switcher_xml b907cd02-8703-4273-845e-0716bac65b4b"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('b907cd02-8703-4273-845e-0716bac65b4b', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?&gt;</span>
+<span class="c">&lt;!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+--&gt;</span>
+
+<span class="c">&lt;!-- Put site-specific property overrides in this file. --&gt;</span>
+
+<span class="nt">&lt;configuration&gt;</span>
+	<span class="c">&lt;!-- nn web 端访问地址--&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>dfs.namenode.http-address<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>hadoop02:9870<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 2nn web 端访问地址--&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>dfs.namenode.secondary.http-address<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>hadoop04:9868<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+
+	<span class="c">&lt;!-- nn 工作线程池并发配置 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>dfs.namenode.handler.count<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>21<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div></div>
+</li><li class="code_switcher_container_parent code_switcher_xml e7ab7bac-5868-4e14-b7dd-d0b8082cf717"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('e7ab7bac-5868-4e14-b7dd-d0b8082cf717', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="cp">&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?&gt;</span>
+<span class="c">&lt;!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+--&gt;</span>
+
+<span class="c">&lt;!-- Put site-specific property overrides in this file. --&gt;</span>
+
+<span class="nt">&lt;configuration&gt;</span>
+	<span class="c">&lt;!-- 指定 mapreduce 程序运行在 yarn 上 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>mapreduce.framework.name<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>yarn<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 历史服务器端地址 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>mapreduce.jobhistory.address<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>hadoop02:10020<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 历史服务器 web 端地址 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>mapreduce.jobhistory.webapp.address<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>hadoop02:19888<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div></div>
+</li><li class="code_switcher_container_parent code_switcher_xml 3168d74e-d84b-4516-9d36-da84c5b6eaa1"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('3168d74e-d84b-4516-9d36-da84c5b6eaa1', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="c">&lt;!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+--&gt;</span>
+<span class="nt">&lt;configuration&gt;</span>
+	<span class="c">&lt;!-- 指定 mapreduce 走 shuffle --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.nodemanager.aux-services<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>mapreduce_shuffle<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 指定 ResourceManager 的地址--&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.resourcemanager.hostname<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>hadoop03<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 环境变量的继承 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.nodemanager.env-whitelist<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 开启日志聚集功能 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.log-aggregation-enable<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 设置日志聚集服务器地址 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.log.server.url<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>http://hadoop02:19888/jobhistory/logs<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 设置日志保留时间为 7 天 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.log-aggregation.retain-seconds<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>604800<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+
+	<span class="c">&lt;!-- 选择调度器，默认容量调度器 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.resourcemanager.scheduler.class<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- ResourceManager 处理调度器请求的线程数量，默认 50 --&gt;</span>
+	<span class="c">&lt;!-- 如果提交的任务数大于 50，可以增加该值，但是不能超过 3 台 * 4 线程 = 12 线程(去除其他应用程序实际不能超过 8) --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.resourcemanager.scheduler.client.thread-count<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>8<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 是否让 yarn 自动检测硬件进行配置，默认是 false --&gt;</span>
+	<span class="c">&lt;!-- 如果该节点有很多其他应用程序，建议手动配置；如果该节点没有其他应用程序，可以采用自动 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.nodemanager.resource.detect-hardware-capabilities<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 是否将虚拟核数当作 CPU 核数，默认是 false，采用物理 CPU 核数 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.nodemanager.resource.count-logical-processors-as-cores<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 虚拟核数和物理核数乘数，默认是 1.0 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.nodemanager.resource.pcores-vcores-multiplier<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>1.0<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- NodeManager 使用内存数，默认 8G，修改为 4G 内存 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.nodemanager.resource.memory-mb<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>4096<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- NodeManager 的 CPU 核数，不按照硬件环境自动设定时默认是 8 个，修改为 4 个 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.nodemanager.resource.cpu-vcores<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>4<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 容器最小内存，默认 1G --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.scheduler.minimum-allocation-mb<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>1024<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 容器最大内存，默认 8G，修改为 2G --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.scheduler.maximum-allocation-mb<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>2048<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 容器最小 CPU 核数，默认 1 个 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.scheduler.minimum-allocation-vcores<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 容器最大 CPU 核数，默认 4 个，修改为 2 个 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.scheduler.maximum-allocation-vcores<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>2<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 虚拟内存检查，默认打开，修改为关闭 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.nodemanager.vmem-check-enabled<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 虚拟内存和物理内存设置比例，默认 2.1 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>yarn.nodemanager.vmem-pmem-ratio<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>2.1<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+
+	<span class="c">&lt;!-- 开启 uber 模式，优化小文件计算，默认关闭 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>mapreduce.job.ubertask.enable<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- uber 模式中最大的 map 数量，仅可向下修改 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>mapreduce.job.ubertask.maxmaps<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>9<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- uber 模式中最大的 reduce 数量，仅可向下修改 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>mapreduce.job.ubertask.maxreduces<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+	<span class="c">&lt;!-- uber 模式中最大的输入数据量，默认使用 dfs.blocksize 的值，仅可向下修改 --&gt;</span>
+	<span class="nt">&lt;property&gt;</span>
+		<span class="nt">&lt;name&gt;</span>mapreduce.job.ubertask.maxbytes<span class="nt">&lt;/name&gt;</span>
+		<span class="nt">&lt;value&gt;&lt;/value&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div></div>
+</li></ul>
+<h2 id="section-2">编写工具脚本</h2>
+<ul class="code-tab-container 0575e81b-1258-4de0-8fdc-4705ab6cbda4"><li class="active-tab code_switcher_shell"><a onclick="selectTab('code_switcher_shell', '0575e81b-1258-4de0-8fdc-4705ab6cbda4', 0)">jpsall</a></li><li class=" code_switcher_shell"><a onclick="selectTab('code_switcher_shell', '0575e81b-1258-4de0-8fdc-4705ab6cbda4', 1)">ihadoop.sh</a></li></ul><ul class="code-tab-switcher 0575e81b-1258-4de0-8fdc-4705ab6cbda4"><li class="code_switcher_container_parent active-tab code_switcher_shell 6e05c352-bdca-4433-a91a-d9d1b7952950"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('6e05c352-bdca-4433-a91a-d9d1b7952950', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="k">for </span>host <span class="k">in </span>hadoop02 hadoop03 hadoop04
+<span class="k">do
+	</span><span class="nb">echo</span> <span class="s2">"&gt; </span><span class="nv">$host</span><span class="s2">"</span>
+	ssh <span class="nt">-o</span> <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no <span class="nv">$host</span> <span class="nv">$JAVA_HOME</span>/bin/jps
+<span class="k">done</span>
+</code></pre></div></div>
+</li><li class="code_switcher_container_parent code_switcher_shell 3eea0133-5bcc-4b86-8f25-e103b0efe157"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('3eea0133-5bcc-4b86-8f25-e103b0efe157', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="nv">usage</span><span class="o">=</span><span class="s2">"Usage: ihadoop.sh (start|stop|restart|cleanup|format)"</span>
+
+<span class="c"># 检查参数个数</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$# </span><span class="nt">-ne</span> 1 <span class="o">]</span>
+<span class="k">then
+	</span><span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"Error: 请输入一个参数!</span><span class="se">\n</span><span class="nv">$usage</span><span class="s2">"</span>
+	<span class="nb">exit
+</span><span class="k">fi
+
+function </span>stop<span class="o">()</span>
+<span class="o">{</span>
+	<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"&gt; 关闭 hadoop 集群..."</span>
+	<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"&gt; stop historyserver..."</span>
+	ssh <span class="nt">-o</span> <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no hadoop02 <span class="s2">"</span><span class="nv">$HADOOP_HOME</span><span class="s2">/bin/mapred --daemon stop historyserver"</span>
+	<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"&gt; stop yarn..."</span>
+	ssh <span class="nt">-o</span> <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no hadoop03 <span class="s2">"</span><span class="nv">$HADOOP_HOME</span><span class="s2">/sbin/stop-yarn.sh"</span>
+	<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"&gt; stop dfs..."</span>
+	ssh <span class="nt">-o</span> <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no hadoop02 <span class="s2">"</span><span class="nv">$HADOOP_HOME</span><span class="s2">/sbin/stop-dfs.sh"</span>
+<span class="o">}</span>
+
+<span class="k">function </span>start<span class="o">()</span>
+<span class="o">{</span>
+	<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"&gt; 启动 hadoop 集群..."</span>
+	<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"&gt; start dfs..."</span>
+	ssh <span class="nt">-o</span> <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no hadoop02 <span class="s2">"</span><span class="nv">$HADOOP_HOME</span><span class="s2">/sbin/start-dfs.sh"</span>
+	<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"&gt; start yarn..."</span>
+	ssh <span class="nt">-o</span> <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no hadoop03 <span class="s2">"</span><span class="nv">$HADOOP_HOME</span><span class="s2">/sbin/start-yarn.sh"</span>
+	<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"&gt; start historyserver..."</span>
+	ssh <span class="nt">-o</span> <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no hadoop02 <span class="s2">"</span><span class="nv">$HADOOP_HOME</span><span class="s2">/bin/mapred --daemon start historyserver"</span>
+<span class="o">}</span>
+
+<span class="k">function </span>cleanup<span class="o">()</span>
+<span class="o">{</span>
+	<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"&gt; 清理 data 和 logs 目录..."</span>
+	<span class="k">for </span>host <span class="k">in </span>hadoop02 hadoop03 hadoop04
+	<span class="k">do
+		</span><span class="nb">echo</span> <span class="s2">"&gt; 清理 </span><span class="nv">$host</span><span class="s2">..."</span>
+		ssh <span class="nt">-o</span> <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no <span class="nv">$host</span> <span class="s2">"rm -rf </span><span class="nv">$HADOOP_HOME</span><span class="s2">/data/* </span><span class="nv">$HADOOP_HOME</span><span class="s2">/logs/*"</span>
+	<span class="k">done</span>
+<span class="o">}</span>
+
+<span class="k">function </span>format<span class="o">()</span>
+<span class="o">{</span>
+	ssh <span class="nt">-o</span> <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no hadoop02 <span class="s2">"</span><span class="nv">$HADOOP_HOME</span><span class="s2">/bin/hdfs namenode -format"</span>
+<span class="o">}</span>
+
+<span class="k">function </span>sleep3s<span class="o">()</span>
+<span class="o">{</span>
+	<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"&gt; sleep 3s..."</span>
+	<span class="nb">sleep </span>3s
+<span class="o">}</span>
+
+<span class="k">case</span> <span class="nv">$1</span> <span class="k">in</span>
+<span class="s2">"stop"</span><span class="p">)</span>
+	stop
+<span class="p">;;</span>
+<span class="s2">"start"</span><span class="p">)</span>
+	start
+<span class="p">;;</span>
+<span class="s2">"restart"</span><span class="p">)</span>
+	stop <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="o">&amp;&amp;</span> sleep3s <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="o">&amp;&amp;</span> start
+<span class="p">;;</span>
+<span class="s2">"cleanup"</span><span class="p">)</span>
+	cleanup
+<span class="p">;;</span>
+<span class="s2">"format"</span><span class="p">)</span>
+	cleanup <span class="o">&amp;&amp;</span> format
+<span class="p">;;</span>
+<span class="k">*</span><span class="p">)</span>
+	<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"Error: 请输入正确的参数!</span><span class="se">\n</span><span class="nv">$usage</span><span class="s2">"</span>
+<span class="p">;;</span>
+<span class="k">esac</span>
+</code></pre></div></div>
+</li></ul>
+<h2 id="dockerfile">Dockerfile</h2>
+<p>基于 <a href="https://github.com/bitnami/containers/blob/main/bitnami/java/1.8/debian-11/Dockerfile">bitnami/java:1.8</a> 构建Docker镜像。</p>
+<ul class="code-tab-container 72391d8d-5ab9-4561-9551-8d5dd6aabf47"><li class="active-tab code_switcher_dockerfile"><a onclick="selectTab('code_switcher_dockerfile', '72391d8d-5ab9-4561-9551-8d5dd6aabf47', 0)">Dockerfile</a></li></ul><ul class="code-tab-switcher 72391d8d-5ab9-4561-9551-8d5dd6aabf47"><li class="code_switcher_container_parent active-tab code_switcher_dockerfile ba1b031b-25d3-4ab6-bc2f-0653eff4fde0"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('ba1b031b-25d3-4ab6-bc2f-0653eff4fde0', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> bitnami/java:1.8</span>
+<span class="k">MAINTAINER</span><span class="s"> vveicc</span>
+
+<span class="k">ARG</span><span class="s"> HADOOP_VERSION=3.3.6</span>
+
+<span class="k">WORKDIR</span><span class="s"> /root</span>
+
+<span class="k">ENV</span><span class="s"> HADOOP_HOME /opt/hadoop</span>
+
+<span class="k">RUN </span><span class="nb">echo</span> <span class="s2">"==&gt; install ssh..."</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">sed</span> <span class="nt">-i</span> s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">sed</span> <span class="nt">-i</span> s@/security.debian.org/@/mirrors.aliyun.com/debian-security@g /etc/apt/sources.list <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    apt-get update <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    apt-get upgrade <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    apt-get <span class="nb">install</span> <span class="nt">-y</span> <span class="nt">--no-install-recommends</span> ssh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"==&gt; setup ssh..."</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">/etc/init.d/ssh start &gt;&gt; /dev/null"</span> <span class="o">&gt;&gt;</span> ~/.bashrc <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    ssh-keygen <span class="nt">-t</span> rsa <span class="nt">-P</span> <span class="s1">''</span> <span class="nt">-f</span> ~/.ssh/id_rsa <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">cat</span> ~/.ssh/id_rsa.pub <span class="o">&gt;&gt;</span> ~/.ssh/authorized_keys <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">chmod </span>0600 ~/.ssh/authorized_keys <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"==&gt; download hadoop..."</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$HADOOP_HOME</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    wget <span class="nt">--no-check-certificate</span> https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-<span class="nv">$HADOOP_VERSION</span>/hadoop-<span class="nv">$HADOOP_VERSION</span>.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">tar</span> <span class="nt">-zxf</span> hadoop-<span class="nv">$HADOOP_VERSION</span>.tar.gz <span class="nt">--strip-components</span> 1 <span class="nt">-C</span> <span class="nv">$HADOOP_HOME</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"==&gt; download configuration &amp; scripts..."</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    wget https://vveicc.github.io/blog/files/docker/hadoop/hadoop.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">tar</span> <span class="nt">-zxf</span> hadoop.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">mv </span>etc/hadoop/<span class="k">*</span> <span class="nv">$HADOOP_HOME</span>/etc/hadoop/ <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">mv </span>scripts/<span class="k">*</span> /usr/local/bin/ <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"==&gt; setup env..."</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export JAVA_HOME=</span><span class="nv">$JAVA_HOME</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> /etc/profile.d/iprofile.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export HADOOP_HOME=</span><span class="nv">$HADOOP_HOME</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> /etc/profile.d/iprofile.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export PATH=</span><span class="se">\$</span><span class="s2">PATH:</span><span class="se">\$</span><span class="s2">JAVA_HOME/bin:</span><span class="se">\$</span><span class="s2">HADOOP_HOME/bin:</span><span class="se">\$</span><span class="s2">HADOOP_HOME/sbin"</span> <span class="o">&gt;&gt;</span> /etc/profile.d/iprofile.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">if [ -f /etc/profile ]; then</span><span class="se">\n\t</span><span class="s2">. /etc/profile</span><span class="se">\n</span><span class="s2">fi"</span> <span class="o">&gt;&gt;</span> ~/.bashrc <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">export SHELL=/bin/bash"</span> <span class="o">&gt;&gt;</span> ~/.bashrc <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">export LS_OPTIONS='--color=auto'"</span> <span class="o">&gt;&gt;</span> ~/.bashrc <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"eval </span><span class="se">\"\`</span><span class="s2">dircolors</span><span class="se">\`\"</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> ~/.bashrc <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"alias ls='ls </span><span class="se">\$</span><span class="s2">LS_OPTIONS'"</span> <span class="o">&gt;&gt;</span> ~/.bashrc <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"alias ll='ls </span><span class="se">\$</span><span class="s2">LS_OPTIONS -lA'"</span> <span class="o">&gt;&gt;</span> ~/.bashrc <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"==&gt; setup hadoop env..."</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export HDFS_NAMENODE_OPTS=</span><span class="se">\"</span><span class="s2">-Dhadoop.security.logger=INFO,RFAS -Xmx1024m</span><span class="se">\"</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> <span class="nv">$HADOOP_HOME</span>/etc/hadoop/hadoop-env.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export HDFS_DATANODE_OPTS=</span><span class="se">\"</span><span class="s2">-Dhadoop.security.logger=ERROR,RFAS -Xmx1024m</span><span class="se">\"</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> <span class="nv">$HADOOP_HOME</span>/etc/hadoop/hadoop-env.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export JAVA_HOME=</span><span class="nv">$JAVA_HOME</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> <span class="nv">$HADOOP_HOME</span>/etc/hadoop/hadoop-env.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export HADOOP_MAPRED_HOME=</span><span class="nv">$HADOOP_HOME</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> <span class="nv">$HADOOP_HOME</span>/etc/hadoop/hadoop-env.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export HDFS_NAMENODE_USER=root"</span> <span class="o">&gt;&gt;</span> <span class="nv">$HADOOP_HOME</span>/etc/hadoop/hadoop-env.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export HDFS_DATANODE_USER=root"</span> <span class="o">&gt;&gt;</span> <span class="nv">$HADOOP_HOME</span>/etc/hadoop/hadoop-env.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export HDFS_SECONDARYNAMENODE_USER=root"</span> <span class="o">&gt;&gt;</span> <span class="nv">$HADOOP_HOME</span>/etc/hadoop/hadoop-env.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export YARN_RESOURCEMANAGER_USER=root"</span> <span class="o">&gt;&gt;</span> <span class="nv">$HADOOP_HOME</span>/etc/hadoop/hadoop-env.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"export YARN_NODEMANAGER_USER=root"</span> <span class="o">&gt;&gt;</span> <span class="nv">$HADOOP_HOME</span>/etc/hadoop/hadoop-env.sh <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="se">\
+</span>    <span class="nb">echo</span> <span class="s2">"==&gt; clean up..."</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    apt-get clean <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists /var/cache/apt/archives <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    <span class="nb">rm</span> <span class="nt">-rf</span> hadoop-<span class="nv">$HADOOP_VERSION</span>.tar.gz hadoop.tar.gz etc scripts
+
+<span class="k">CMD</span><span class="s"> ["/bin/bash"]</span>
+
+<span class="c"># NameNode WEB UI 端口</span>
+<span class="k">EXPOSE</span><span class="s"> 9870</span>
+<span class="c"># DataNode WEB UI 端口</span>
+<span class="k">EXPOSE</span><span class="s"> 9864</span>
+<span class="c"># SecondaryNameNode WEB UI 端口</span>
+<span class="k">EXPOSE</span><span class="s"> 9868</span>
+<span class="c"># 历史服务器 WEB UI 端口</span>
+<span class="k">EXPOSE</span><span class="s"> 19888</span>
+<span class="c"># Yarn WEB UI 端口</span>
+<span class="k">EXPOSE</span><span class="s"> 8088</span>
+</code></pre></div></div>
+</li></ul>
+<h2 id="docker-composeyaml">docker-compose.yaml</h2>
+<p>使用静态IP，便于在宿主机访问容器，如果子网IP如有冲突，需要更改为未占用的IP。</p>
+<ul class="code-tab-container bc50abab-9603-4be4-8c69-5fed525f1ac1"><li class="active-tab code_switcher_yaml"><a onclick="selectTab('code_switcher_yaml', 'bc50abab-9603-4be4-8c69-5fed525f1ac1', 0)">docker-compose.yaml</a></li></ul><ul class="code-tab-switcher bc50abab-9603-4be4-8c69-5fed525f1ac1"><li class="code_switcher_container_parent active-tab code_switcher_yaml 3679c222-9656-4609-a36d-366e6cf97ba7"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('3679c222-9656-4609-a36d-366e6cf97ba7', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.1"</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">cluster</span><span class="pi">:</span>
+    <span class="na">ipam</span><span class="pi">:</span>
+      <span class="na">driver</span><span class="pi">:</span> <span class="s">default</span>
+      <span class="na">config</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">subnet</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.18.0.0/28"</span>
+          <span class="na">gateway</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.18.0.1"</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">hadoop02</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">vveicc/hadoop:3.3.6</span>
+    <span class="na">hostname</span><span class="pi">:</span> <span class="s">hadoop02</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">hadoop02</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">stdin_open</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">tty</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">cluster</span><span class="pi">:</span>
+        <span class="na">ipv4_address</span><span class="pi">:</span> <span class="s">172.18.0.2</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./hadoop02/hadoop/data:/opt/hadoop/data</span>
+      <span class="pi">-</span> <span class="s">./hadoop02/hadoop/logs:/opt/hadoop/logs</span>
+
+  <span class="na">hadoop03</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">vveicc/hadoop:3.3.6</span>
+    <span class="na">hostname</span><span class="pi">:</span> <span class="s">hadoop03</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">hadoop03</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">stdin_open</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">tty</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">cluster</span><span class="pi">:</span>
+        <span class="na">ipv4_address</span><span class="pi">:</span> <span class="s">172.18.0.3</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./hadoop03/hadoop/data:/opt/hadoop/data</span>
+      <span class="pi">-</span> <span class="s">./hadoop03/hadoop/logs:/opt/hadoop/logs</span>
+
+  <span class="na">hadoop04</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">vveicc/hadoop:3.3.6</span>
+    <span class="na">hostname</span><span class="pi">:</span> <span class="s">hadoop04</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">hadoop04</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">stdin_open</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">tty</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">cluster</span><span class="pi">:</span>
+        <span class="na">ipv4_address</span><span class="pi">:</span> <span class="s">172.18.0.4</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./hadoop04/hadoop/data:/opt/hadoop/data</span>
+      <span class="pi">-</span> <span class="s">./hadoop04/hadoop/logs:/opt/hadoop/logs</span>
+</code></pre></div></div>
+</li></ul>
+<h2 id="section-3">快速部署脚本</h2>
+<p>编写快速部署脚本：</p>
+<ul class="code-tab-container 9603113d-7db0-4697-be88-f28d1f9448cb"><li class="active-tab code_switcher_shell"><a onclick="selectTab('code_switcher_shell', '9603113d-7db0-4697-be88-f28d1f9448cb', 0)">hadoop-init.sh</a></li></ul><ul class="code-tab-switcher 9603113d-7db0-4697-be88-f28d1f9448cb"><li class="code_switcher_container_parent active-tab code_switcher_shell 257c306e-1d5f-44a4-abe4-18e993e4fc4d"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('257c306e-1d5f-44a4-abe4-18e993e4fc4d', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="si">$(</span>which wget<span class="si">)</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+  </span><span class="nb">echo</span> <span class="s2">"Error: wget not installed"</span>
+  <span class="nb">exit
+</span><span class="k">fi</span>
+
+<span class="c"># 在当前目录下创建hadoop文件夹作为工作目录</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> hadoop
+
+<span class="nb">cd </span>hadoop
+wget https://vveicc.github.io/blog/files/docker/hadoop/Dockerfile
+wget https://vveicc.github.io/blog/files/docker/hadoop/docker-compose.yaml
+
+<span class="nb">echo</span> <span class="s2">"&gt; 构建镜像..."</span>
+docker build <span class="nt">-t</span> vveicc/hadoop:3.3.6 <span class="nb">.</span>
+
+<span class="nb">echo</span> <span class="s2">"&gt; 创建宿主机数据卷目录..."</span>
+<span class="k">for </span>host <span class="k">in </span>hadoop02 hadoop03 hadoop04
+<span class="k">do
+       </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$host</span>/hadoop/data
+       <span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$host</span>/hadoop/logs
+<span class="k">done
+
+</span><span class="nb">echo</span> <span class="s2">"&gt; 运行容器实例..."</span>
+docker compose up <span class="nt">-d</span>
+</code></pre></div></div>
+</li></ul>
+<p>在 Mac 上通过脚本快速部署：</p>
+<div class="code_switcher_container_parent b8dc734a-e2dd-4e6e-8938-5c5e4839a26c"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('b8dc734a-e2dd-4e6e-8938-5c5e4839a26c', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://vveicc.github.io/blog/files/docker/hadoop/hadoop-init.sh
+bash hadoop-init.sh
+</code></pre></div></div>
+</div>
+<h2 id="hadoop">启动Hadoop集群</h2>
+<p>查看 Docker 容器：</p>
+<div class="code_switcher_container_parent dea57ee0-31d6-4bdb-85fe-bfe9b0b702c6"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('dea57ee0-31d6-4bdb-85fe-bfe9b0b702c6', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>hadoop
+docker compose ps
+</code></pre></div></div>
+</div>
+<p>进入 Docker 容器：</p>
+<div class="code_switcher_container_parent 934ca5a8-7a6f-40f6-9919-c0b7421ac995"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('934ca5a8-7a6f-40f6-9919-c0b7421ac995', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> hadoop02 bash
+</code></pre></div></div>
+</div>
+<p>第一次启动集群需要先格式化 NameNode ：</p>
+<div class="code_switcher_container_parent f4480583-85df-4229-8a61-7858d8beac6c"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('f4480583-85df-4229-8a61-7858d8beac6c', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@hadoop02:~# ihadoop.sh format
+</code></pre></div></div>
+</div>
+<p>启动 Hadoop 集群：</p>
+<div class="code_switcher_container_parent 39d3a99e-f3cf-4b9d-82d3-e170b0471b39"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('39d3a99e-f3cf-4b9d-82d3-e170b0471b39', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@hadoop02:~# ihadoop.sh start
+</code></pre></div></div>
+</div>
+<p>查看集群 Java 进程：</p>
+<div class="code_switcher_container_parent 61b91888-6549-4f28-b825-11e42116449e"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('61b91888-6549-4f28-b825-11e42116449e', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@hadoop02:~# jpsall
+</code></pre></div></div>
+</div>
+<p>如果看到的进程信息与 <a href="#%E9%9B%86%E7%BE%A4%E8%A7%84%E5%88%92">集群规划</a> 一致，说明 Hadoop 集群启动成功。</p>
+<p>运行 <code>WordCount</code> 示例程序，测试验证集群是否正常：</p>
+<div class="code_switcher_container_parent efeb4dc3-7517-478f-9359-881e98f85457"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('efeb4dc3-7517-478f-9359-881e98f85457', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@hadoop02:~# hdfs dfs <span class="nt">-mkdir</span> /input
+root@hadoop02:~# hdfs dfs <span class="nt">-put</span> <span class="nv">$HADOOP_HOME</span>/README.txt /input/
+root@hadoop02:~# hdfs dfs <span class="nt">-ls</span> /input
+root@hadoop02:~# hadoop jar <span class="nv">$HADOOP_HOME</span>/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.6.jar wordcount /input /output
+</code></pre></div></div>
+</div>
+<h2 id="mac">Mac宿主机访问集群</h2>
+<p><code>Docker Desktop for Mac</code> 没有提供从宿主的macOS通过容器IP访问容器的方式。</p>
+<p>需要通过 <a href="https://github.com/wenjunxiao/mac-docker-connector">mac-docker-connector</a> 将Mac宿主机与Docker容器网络打通。</p>
+<p>如果在网络打通过程中遇到问题，可以参考 <a href="mac_docker_connector">Mac宿主机与Docker容器网络打通</a> 解决。</p>
+<p>网络打通后，在 <code>/etc/hosts</code> 文件中添加域名IP映射：</p>
+<div class="code_switcher_container_parent 3c7a8bee-0c21-43be-baf4-5eed187d19c4"><div class="code_switcher_code_action_container"><button id="code_switcher_copy_button" class="code_switcher_copy_button" title="Copy" onclick="copyText('3c7a8bee-0c21-43be-baf4-5eed187d19c4', '')"></button><button class="code_switcher_theme_button" onclick="updateTheme(true)"></button></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>172.18.0.2 hadoop02
+172.18.0.3 hadoop03
+172.18.0.4 hadoop04
+</code></pre></div></div>
+</div>
+<p>在宿主机访问 HDFS：<a href="http://hadoop02:9870">hadoop02:9870</a></p>
+<p>在宿主机访问 Yarn：<a href="http://hadoop03:8088">hadoop03:8088</a></p>
+
+  </div>
+
+  
+  
+  
+<hr/>
+<script src="https://utteranc.es/client.js"
+        repo="vveicc/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="https://vveicc.github.io/blog/mac_docker_connector">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+</div>
+      </div>
+    </div>
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <script>
+    (function (d) {
+        const blank_suf = "__blank/";
+        const site_url = "https://vveicc.github.io";
+        const as = d.getElementById("main").getElementsByTagName("a");
+        for (const element of as) {
+            const a = element;
+            const url = a.href;
+            if (!url.startsWith(site_url)) {
+                a.target = "_blank"
+            } else if (url.endsWith(blank_suf)) {
+                a.href = url.substring(0, url.length - blank_suf.length)
+                a.target = "_blank"
+            }
+        }
+    })(document);
+</script>
+
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+  <li><a href="mailto:vveicc@163.com" target="_blank" class="icon-8 email" title="Email"><svg viewBox="0 0 512 512"><path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/></svg><!--[if lt IE 9]><em>Email</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://leetcode.cn/u/vveicc" target="_blank" class="icon-12 leetcode" title="LeetCode"><svg viewBox="0 0 1024 1024"><path d="M686.969238 765.086476l-115.039501 111.200586c-19.877051 19.919706-47.389279 28.237356-77.759367 28.237357s-57.882315-8.31765-77.802021-28.237357l-184.779799-186.102093c-19.919706-19.919706-29.943541-49.052809-29.943541-79.465551s10.023835-57.882315 29.943541-77.80202l184.225289-186.827222c19.919706-19.919706 47.986444-27.512228 78.356531-27.512228s57.882315 8.31765 77.759367 28.237357l115.039501 111.157931c21.924473 21.967128 58.223552 21.199345 81.043772-1.620876 22.82022-22.862875 23.588003-59.161953 1.66353-81.086426l-111.285895-112.43757a215.619088 215.619088 0 0 0-104.290538-57.029222l105.228939-106.764506c22.009782-21.924473 21.241999-58.266206-1.578221-81.086426-22.82022-22.82022-59.161953-23.545348-81.129081-1.620876l-430.811629 430.854284c-41.844179 41.886834-63.725997 99.683839-63.725997 163.580455 0 63.896616 21.881818 123.485115 63.725997 165.28664l185.419619 186.016783c41.844179 41.75887 99.683839 61.934504 163.537801 61.934504s121.693622-21.839164 163.580455-63.725997l111.285895-112.480225c21.924473-21.924473 21.15669-58.223552-1.66353-81.043772s-59.119299-23.588003-81.001117-1.66353z m200.86059-209.860714H455.098741c-29.943541 0-54.171363 25.763389-54.171363 57.413114s24.227822 57.413114 54.171363 57.413114h432.731087c29.900886 0 54.171363-25.763389 54.171363-57.413114s-24.270477-57.413114-54.171363-57.413114z"/></svg><!--[if lt IE 9]><em>LeetCode</em><![endif]--></a></li>
+  
+
+  
+  <li><a href="https://github.com/vveicc" target="_blank" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>2015-2023 © VVEICC</p>
+
+
+    </footer>
+  </div>
+
+</html>
